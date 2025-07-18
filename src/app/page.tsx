@@ -1,7 +1,5 @@
 // HOME PAGE CENTRALIZADA
 'use client';
-import Link from 'next/link';
-import Image from 'next/image';
 import Form from '../components/Form';
 
 export default function Home() {
