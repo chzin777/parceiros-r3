@@ -30,10 +30,11 @@ export default function Form() {
   const [empresa, setEmpresa] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [nascimento, setNascimento] = useState(''); // NOVO ESTADO!
   const [loading, setLoading] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
 
-  // Estados do toast
+  // Toast
   const [toastShow, setToastShow] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState<'success' | 'error'>('success');
@@ -57,6 +58,7 @@ export default function Form() {
       cargo,
       email,
       telefone,
+      nascimento, // ADICIONADO AQUI!
       data_envio: new Date().toISOString(),
     };
 
@@ -71,6 +73,7 @@ export default function Form() {
       setEmpresa('');
       setEmail('');
       setTelefone('');
+      setNascimento('');
       setPrivacyChecked(false);
       setLoading(false);
 
@@ -157,7 +160,19 @@ export default function Form() {
             className="px-3 py-2 rounded-md bg-white/10 text-white border border-white/20 placeholder-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-white/30 transition"
           />
         </label>
-
+        {/* NOVO CAMPO: Data de nascimento */}
+        <label className="flex flex-col">
+          <span className="mb-1 text-sm sm:text-base font-medium">
+            Data de nascimento:<span className="text-red-400 ml-1">*</span>
+          </span>
+          <input
+            type="date"
+            value={nascimento}
+            onChange={e => setNascimento(e.target.value)}
+            required
+            className="px-3 py-2 rounded-md bg-white/10 text-white border border-white/20 placeholder-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-white/30 transition"
+          />
+        </label>
         {/* Checkbox de política de privacidade */}
         <label className="flex flex-col gap-1 text-sm sm:text-base font-medium">
           <span className="flex items-start gap-2">
