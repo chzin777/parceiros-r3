@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Parceiros R3 — Formulário de cadastro
 
-## Getting Started
+Formulário web de cadastro de parceiros da **R3 Suprimentos** (segmento de hotelaria). Os dados enviados são gravados no Supabase.
 
-First, run the development server:
+**Produção:** https://parceiros-r3.vercel.app
+
+## Stack
+
+- [Next.js 15](https://nextjs.org) (App Router) + React 19 + TypeScript
+- Tailwind CSS 4, Headless UI, Radix (checkbox), Framer Motion
+- `react-input-mask` (máscaras de telefone/documento)
+- Supabase (`@supabase/supabase-js`)
+
+## Como rodar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+# crie o arquivo .env.local com as variáveis abaixo
+npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Variáveis de ambiente (`.env.local`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variável | Descrição |
+|----------|-----------|
+| `NEXT_PUBLIC_SUPABASE_URL` | URL do projeto Supabase |
+| `NEXT_PUBLIC_SUPABASE_KEY` | Chave pública (anon) do Supabase |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Banco
 
-## Learn More
+O formulário insere registros na tabela **`formularios`** do Supabase. Garanta que a tabela exista e que a política RLS permita `insert` para a chave anon.
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+lib/supabaseClient.tsx      cliente Supabase
+src/app/page.tsx            página do formulário
+src/components/Form.tsx     formulário e envio
+src/components/SelectCargo.tsx   seletor de cargo
+src/components/Toast.tsx    feedback de envio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel — configure as duas variáveis acima no painel do projeto.
